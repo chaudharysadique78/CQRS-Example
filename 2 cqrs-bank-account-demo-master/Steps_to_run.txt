@@ -1,0 +1,54 @@
+cd cqrs-bank-account-demo-master
+mvn package
+cd target
+java -jar bank-accounts-cqrs-demo-0.0.1-SNAPSHOT.jar
+
+localhost:8080/h2-console
+Database URL=> jdbc:h2:mem:testdb
+Click -> connect
+
+POST: localhost:8080/bank-account/create
+Body:
+{
+"startingBalance": 10000
+}
+Response: 648b1600-02fe-407f-9dee-08fd6856fd31
+
+
+GET: localhost:8080/manage-account/get-account?id=648b1600-02fe-407f-9dee-08fd6856fd31
+{
+    "accountId": "8d2b15b1-ede4-4004-b2a2-6daceb5dcf63",
+    "balance": 10000.00,
+    "status": "ACTIVATED"
+}
+PUT: localhost:8080/bank-account/deposit
+Body:
+{
+	"accountId": "8d2b15b1-ede4-4004-b2a2-6daceb5dcf63",
+	"amount": 1000
+}
+Response:
+{
+    "accountId": "8d2b15b1-ede4-4004-b2a2-6daceb5dcf63",
+    "balance": 11000.00,
+    "status": "ACTIVATED"
+}
+PUT: localhost:8080/bank-account/withdraw
+Body:
+{
+	"accountId": "8d2b15b1-ede4-4004-b2a2-6daceb5dcf63",
+	"amount": 2000
+}
+
+GET: localhost:8080/manage-account/get-account?id=8d2b15b1-ede4-4004-b2a2-6daceb5dcf63
+{
+    "accountId": "8d2b15b1-ede4-4004-b2a2-6daceb5dcf63",
+    "balance": 9000.00,
+    "status": "ACTIVATED"
+}
+
+
+
+
+
+

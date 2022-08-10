@@ -1,0 +1,18 @@
+cmd
+cd conference-demo-bike-rental-master
+mvn package
+set CF_INSTANCE_PORT=8761
+set CF_INSTANCE_IP=127.0.0.1
+cd target
+
+
+java -jar -Dspring.rabbitmq.host=172.18.32.152 -Dspring.rabbitmq.password=guest -Dspring.rabbitmq.port=5672 -Dspring.rabbitmq.username=guest -Dserver.port=9090 bike-rental-0.0.1-SNAPSHOT.jar
+localhost:9090/provision/chennai
+localhost:9090/rent/{id}/sai
+localhost:9090/return/{id}/pondicherry
+
+1f45da01-680b-425f-80ca-8c5c39040876
+localhost:9090/rent/1f45da01-680b-425f-80ca-8c5c39040876/sai
+http://localhost:9090/status
+localhost:9090/return/1f45da01-680b-425f-80ca-8c5c39040876/pondicherry
+http://localhost:9090/status
